@@ -7,23 +7,6 @@ using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour
 {
-
-    private Rigidbody2D rb;
-
-    public static PlayerController instance;
-
-    private void Awake()
-    {
-        if(instance != null && instance != this)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            instance = this;
-        }
-    }
-
     [SerializeField] private Transform groundCheck;
 
     [SerializeField] private float groundCheckY = 0.2f;
@@ -37,41 +20,92 @@ public class PlayerController : MonoBehaviour
     private int maxJump = 2;
     private int jumpLeft;
 
+    PlayerStateList pState;
+
     private float xAxis;
     Animator anim;
+
+    private Rigidbody2D rb;
+
+    public static PlayerController instance;
+
+    private bool canDash;
+    private bool dashed;
+    [SerializeField] private float dashSpeed;
+    [SerializeField] private float dashTime;
+    [SerializeField] private float dashCooldown;
+
+    private float gravity;
+
+    private void Awake()
+    {
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+        }
+    }
+
+    
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        pState = GetComponent<PlayerStateList>();
         jumpLeft = maxJump;
+
+        gravity = rb.gravityScale;
 
 
     }
 
     private void Update()
     {
+        
         GetInput();
+        if (pState.dashing) return;
         Movement();
         Jump();
         Flip();
+        StartDash();
     }
 
     private void Movement()
     {
-        //Move Horizontal
         var horizontalInput = Input.GetAxis("Horizontal");
-        
-       
         rb.velocity = new Vector2(horizontalInput * speed, rb.velocity.y);
 
         anim.SetBool("isRunning", rb.velocity.x != 0 && IsGrounded());
+    }
 
-        //Flip
-        //if (horizontalInput != 0)
-        //{
-        //    transform.localScale = new Vector3(Mathf.Sign(-horizontalInput), 1, 1);
-        //}
+    private void StartDash()
+    {
+        if(Input.GetButtonDown("Dash") && canDash && !dashed)
+        {
+            StartCoroutine(Dash());
+            dashed = true;
+        }
+        if (IsGrounded()) {
+            dashed = false;
+        }
+    }
+
+    IEnumerator Dash()
+    {
+        canDash = false;
+        pState.dashing = true;
+        anim.SetTrigger("Dashing");
+        rb.gravityScale = 0;
+        rb.velocity = new Vector2(transform.localScale.x * dashSpeed, 0);
+        yield return new WaitForSeconds(dashTime);
+        rb.gravityScale = gravity;
+        pState.dashing = false;
+        yield return new WaitForSeconds(dashCooldown);
+        canDash = true;
     }
 
     private void GetInput()
@@ -80,10 +114,11 @@ public class PlayerController : MonoBehaviour
     }
     private void Flip()
     {
-        if(xAxis > 0)
+        if (xAxis > 0)
         {
             transform.localScale = new Vector2(-1, transform.localScale.y);
-        } else if (xAxis < 0)
+        }
+        else if (xAxis < 0)
         {
             transform.localScale = new Vector2(1, transform.localScale.y);
         }
@@ -93,8 +128,9 @@ public class PlayerController : MonoBehaviour
     {
         var jumpInput = Input.GetButtonDown("Jump");
         var jumpInputReleased = Input.GetButtonUp("Jump");
+
         //reset when grounded
-        if(IsGrounded() && rb.velocity.y <= 0)
+        if (IsGrounded() && rb.velocity.y <= 0)
         {
             jumpLeft = maxJump;
         }
@@ -102,18 +138,18 @@ public class PlayerController : MonoBehaviour
         {
             rb.velocity = new Vector3(rb.velocity.x, jumpForce);
             jumpLeft -= 1;
-            
+
         }
 
         if (jumpInputReleased && rb.velocity.y > 0)
         {
             rb.velocity = new Vector2(rb.velocity.x, 0);
-            
+
         }
         anim.SetBool("isJumping", !IsGrounded());
     }
 
-    
+
     private bool IsGrounded()
     {
         if (Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckY, collisionMask)
