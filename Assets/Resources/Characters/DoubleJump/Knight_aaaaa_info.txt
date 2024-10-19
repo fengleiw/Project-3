@@ -1,0 +1,15 @@
+version: 2
+type: animation
+name: Double Jump
+consistent_sprite_size: true
+enable_borders: false
+use_sprite_name: false
+sprites: 8
+0	Double Jump_000.png
+1	Double Jump_001.png
+2	Double Jump_002.png
+3	Double Jump_003.png
+4	Double Jump_004.png
+5	Double Jump_005.png
+6	Double Jump_006.png
+7	Double Jump_007.png
