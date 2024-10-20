@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.Net.Sockets;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -43,6 +45,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Vector2 SideAttackArea, UpAttackArea, DownAttackArea;
     [SerializeField] LayerMask attackableLayer;
     [SerializeField] float damage;
+    [SerializeField] GameObject slashEffect;
+
+    [Header("Recoil Setting")]
+    [SerializeField] int recoilXStep = 5;
+    [SerializeField] int recoilYStep = 5;
+    [SerializeField] float recoilXSpeed = 100;
+    [SerializeField] float recoilYSpeed = 100;
+    int stepXRecoilded, stepYRecoilded;
 
     private float xAxis, yAxis;
     Animator anim;
@@ -51,7 +61,7 @@ public class PlayerController : MonoBehaviour
 
     public static PlayerController instance;
 
-    
+
 
     private void Awake()
     {
@@ -95,7 +105,7 @@ public class PlayerController : MonoBehaviour
     private void StartDash()
     {
         //Got some problems with canDash variable (fixed)
-        if(Input.GetButtonDown("Dash") && canDash && !dashed)
+        if (Input.GetButtonDown("Dash") && canDash && !dashed)
         {
             StartCoroutine(Dash());
             dashed = true;
@@ -113,7 +123,8 @@ public class PlayerController : MonoBehaviour
         anim.SetTrigger("Dashing");
         rb.gravityScale = 0;
         rb.velocity = new Vector2(-transform.localScale.x * dashSpeed, 0);
-        /*if (IsGrounded())*/ Instantiate(dashEffect, transform);
+        /*if (IsGrounded())*/
+        Instantiate(dashEffect, transform);
         yield return new WaitForSeconds(dashTime);
 
         rb.gravityScale = gravity;
@@ -133,10 +144,12 @@ public class PlayerController : MonoBehaviour
         if (xAxis > 0)
         {
             transform.localScale = new Vector2(-1, transform.localScale.y);
+            pState.lookingLeft = false;
         }
         else if (xAxis < 0)
         {
             transform.localScale = new Vector2(1, transform.localScale.y);
+            pState.lookingLeft = true;
         }
     }
 
@@ -183,21 +196,24 @@ public class PlayerController : MonoBehaviour
     private void Attack()
     {
         timeSinceAttack += Time.deltaTime;
-        if(attack && timeSinceAttack >= timeBetweenAttack)
+        if (attack && timeSinceAttack >= timeBetweenAttack)
         {
             timeSinceAttack = 0;
             anim.SetTrigger("Attacking");
 
-            if(yAxis == 0 || yAxis < 0 && IsGrounded())
+            if (yAxis == 0 || yAxis < 0 && IsGrounded())
             {
-                Hit(SideAttackTransform, SideAttackArea);
-            } else if(yAxis > 0)
+                Hit(SideAttackTransform, SideAttackArea, ref pState.recoilingX, recoilXSpeed);
+                Instantiate(slashEffect, SideAttackTransform);
+            } else if (yAxis > 0)
             {
-                Hit(UpAttackTransform, UpAttackArea);
+                Hit(UpAttackTransform, UpAttackArea, ref pState.recoilingY, recoilYSpeed);
+                SlashEffectAtAngle(slashEffect, -90, UpAttackTransform);
             }
             else if (yAxis < 0 && !IsGrounded())
             {
-                Hit(DownAttackTransform, DownAttackArea);
+                Hit(DownAttackTransform, DownAttackArea, ref pState.recoilingY, recoilYSpeed);
+                SlashEffectAtAngle(slashEffect, 90, DownAttackTransform);
             }
         }
     }
@@ -209,19 +225,95 @@ public class PlayerController : MonoBehaviour
         Gizmos.DrawWireCube(UpAttackTransform.position, UpAttackArea);
         Gizmos.DrawWireCube(DownAttackTransform.position, DownAttackArea);
     }
-    private void Hit(Transform _attackTransform, Vector2 _attackArea)
+    private void Hit(Transform _attackTransform, Vector2 _attackArea, ref bool _recoilDir, float recoilStrength)
     {
         Collider2D[] objectsToHit = Physics2D.OverlapBoxAll(_attackTransform.position, _attackArea, 0, attackableLayer);
         if (objectsToHit.Length > 0)
         {
-            Debug.Log("Hit");
+            _recoilDir = true;
         }
         for (int i = 0; i < objectsToHit.Length; i++)
         {
             if (objectsToHit[i].GetComponent<EnemyController>() != null)
             {
-                objectsToHit[i].GetComponent<EnemyController>().EnemyHit(damage);
+                objectsToHit[i].GetComponent<EnemyController>().EnemyHit(damage, (transform.position - objectsToHit[i].transform.position).normalized, recoilStrength);
             }
         }
+    }
+
+    //Need to change this below code for up and down attack animation, they have other animation with match with them.
+    //Just for testing
+    void SlashEffectAtAngle(GameObject _slashEffect, int _effectAngle, Transform _attackTransform)
+    {
+        _slashEffect = Instantiate(_slashEffect, _attackTransform);
+        _slashEffect.transform.eulerAngles = new Vector3(0, 0, _effectAngle);
+        _slashEffect.transform.localScale = new Vector2(transform.localScale.x, transform.localScale.y);
+    }
+
+    private void Recoil()
+    {
+        if (pState.recoilingX)
+        {
+            if (pState.lookingLeft)
+            {
+                rb.velocity = new Vector2(recoilXSpeed, 0);
+            } else
+            {
+                rb.velocity = new Vector2(-recoilXSpeed, 0);
+            }
+        }
+
+        if (pState.recoilingY)
+        {
+            rb.gravityScale = 0;
+            if (yAxis < 0)
+            {
+
+                rb.velocity = new Vector2(rb.velocity.x, recoilYSpeed);
+            }
+            else
+            {
+                rb.velocity = new Vector2(rb.velocity.x, -recoilYSpeed);
+            }
+            jumpLeft = 0;
+        }
+        else
+        {
+            rb.gravityScale = gravity;
+        }
+
+        //Stop recoil
+        if(pState.recoilingX && stepXRecoilded < recoilXStep)
+        {
+            stepXRecoilded++;
+        }
+        else
+        {
+            StopRecoilX();
+        }
+        if(pState.recoilingY && stepYRecoilded < recoilYStep)
+        {
+            stepYRecoilded++;
+        }
+        else
+        {
+            StopRecoilY();
+        }
+        if (IsGrounded())
+        {
+            StopRecoilY();
+        }
+
+    }
+    
+    private void StopRecoilX()
+    {
+        stepXRecoilded = 0;
+        pState.recoilingX = false;
+    }
+    private void StopRecoilY()
+    {
+        stepYRecoilded = 0;
+        pState.recoilingY = false;
     }
 }

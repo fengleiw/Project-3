@@ -439,7 +439,7 @@ Transform:
   m_GameObject: {fileID: 332251565}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.42, y: -0.39, z: 0}
+  m_LocalPosition: {x: -0.95, y: -0.39, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2180,13 +2180,14 @@ MonoBehaviour:
   SideAttackTransform: {fileID: 332251566}
   UpAttackTransform: {fileID: 962148339}
   DownAttackTransform: {fileID: 904989107}
-  SideAttackArea: {x: 2.4, y: 1.8}
+  SideAttackArea: {x: 1.71, y: 1.2}
   UpAttackArea: {x: 1.8, y: 1.5}
   DownAttackArea: {x: 1.8, y: 1.5}
   attackableLayer:
     serializedVersion: 2
     m_Bits: 128
   damage: 2
+  slashEffect: {fileID: 7212234313915095894, guid: 693809be115b6ae43843d548e24195de, type: 3}
 --- !u!50 &1915927190
 Rigidbody2D:
   serializedVersion: 4
