@@ -36,13 +36,22 @@ public class PlayerController : MonoBehaviour
     private float gravity;
     [Space(5)]
 
-    private float xAxis;
+    [Header("Attacking Setting")]
+    bool attack = false;
+    float timeBetweenAttack, timeSinceAttack;
+    [SerializeField] Transform SideAttackTransform, UpAttackTransform, DownAttackTransform;
+    [SerializeField] Vector2 SideAttackArea, UpAttackArea, DownAttackArea;
+    [SerializeField] LayerMask attackableLayer;
+    [SerializeField] float damage;
+
+    private float xAxis, yAxis;
     Animator anim;
     PlayerStateList pState;
     private Rigidbody2D rb;
 
     public static PlayerController instance;
 
+    
 
     private void Awake()
     {
@@ -73,6 +82,7 @@ public class PlayerController : MonoBehaviour
         Jump();
         Flip();
         StartDash();
+        Attack();
     }
 
     private void Movement()
@@ -115,6 +125,8 @@ public class PlayerController : MonoBehaviour
     private void GetInput()
     {
         xAxis = Input.GetAxisRaw("Horizontal");
+        yAxis = Input.GetAxisRaw("Vertical");
+        attack = Input.GetMouseButtonDown(0);
     }
     private void Flip()
     {
@@ -167,4 +179,49 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+
+    private void Attack()
+    {
+        timeSinceAttack += Time.deltaTime;
+        if(attack && timeSinceAttack >= timeBetweenAttack)
+        {
+            timeSinceAttack = 0;
+            anim.SetTrigger("Attacking");
+
+            if(yAxis == 0 || yAxis < 0 && IsGrounded())
+            {
+                Hit(SideAttackTransform, SideAttackArea);
+            } else if(yAxis > 0)
+            {
+                Hit(UpAttackTransform, UpAttackArea);
+            }
+            else if (yAxis < 0 && !IsGrounded())
+            {
+                Hit(DownAttackTransform, DownAttackArea);
+            }
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireCube(SideAttackTransform.position, SideAttackArea);
+        Gizmos.DrawWireCube(UpAttackTransform.position, UpAttackArea);
+        Gizmos.DrawWireCube(DownAttackTransform.position, DownAttackArea);
+    }
+    private void Hit(Transform _attackTransform, Vector2 _attackArea)
+    {
+        Collider2D[] objectsToHit = Physics2D.OverlapBoxAll(_attackTransform.position, _attackArea, 0, attackableLayer);
+        if (objectsToHit.Length > 0)
+        {
+            Debug.Log("Hit");
+        }
+        for (int i = 0; i < objectsToHit.Length; i++)
+        {
+            if (objectsToHit[i].GetComponent<EnemyController>() != null)
+            {
+                objectsToHit[i].GetComponent<EnemyController>().EnemyHit(damage);
+            }
+        }
+    }
 }

@@ -1,0 +1,13 @@
+version: 2
+type: animation
+name: SlashEffect
+consistent_sprite_size: true
+enable_borders: false
+use_sprite_name: false
+sprites: 6
+0	SlashEffect_000.png
+1	SlashEffect_001.png
+2	SlashEffect_002.png
+3	SlashEffect_003.png
+4	SlashEffect_004.png
+5	SlashEffect_005.png
