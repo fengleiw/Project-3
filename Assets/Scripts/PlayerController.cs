@@ -7,35 +7,40 @@ using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private Transform groundCheck;
 
+    [Header("Horizontal Setting")]
+    [SerializeField] private float speed = 2f;
+    [Space(5)]
+
+    [Header("Vertical Setting")]
+    [SerializeField] private int maxJump = 2;
+    private int jumpLeft;
+    [SerializeField] private float jumpForce = 10f;
+    [Space(5)]
+
+    [Header("Ground Check Setting")]
+    [SerializeField] private Transform groundCheck;
     [SerializeField] private float groundCheckY = 0.2f;
     [SerializeField] private float groundCheckX = 0.5f;
-    [SerializeField] private float speed = 2f;
-    [SerializeField] private float jumpForce = 10f;
-
     [SerializeField] private LayerMask collisionMask;
+    [Space(5)]
 
-    [SerializeField]
-    private int maxJump = 2;
-    private int jumpLeft;
-
-    PlayerStateList pState;
-
-    private float xAxis;
-    Animator anim;
-
-    private Rigidbody2D rb;
-
-    public static PlayerController instance;
-
-    private bool canDash;
+    [Header("Dash Setting")]
+    private bool canDash = true;
     private bool dashed;
     [SerializeField] private float dashSpeed;
     [SerializeField] private float dashTime;
     [SerializeField] private float dashCooldown;
-
     private float gravity;
+    [Space(5)]
+
+    private float xAxis;
+    Animator anim;
+    PlayerStateList pState;
+    private Rigidbody2D rb;
+
+    public static PlayerController instance;
+
 
     private void Awake()
     {
@@ -49,23 +54,17 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    
-
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         pState = GetComponent<PlayerStateList>();
         jumpLeft = maxJump;
-
         gravity = rb.gravityScale;
-
-
     }
 
     private void Update()
     {
-        
         GetInput();
         if (pState.dashing) return;
         Movement();
@@ -78,12 +77,12 @@ public class PlayerController : MonoBehaviour
     {
         var horizontalInput = Input.GetAxis("Horizontal");
         rb.velocity = new Vector2(horizontalInput * speed, rb.velocity.y);
-
         anim.SetBool("isRunning", rb.velocity.x != 0 && IsGrounded());
     }
 
     private void StartDash()
     {
+        //Got some problems with canDash variable (fixed)
         if(Input.GetButtonDown("Dash") && canDash && !dashed)
         {
             StartCoroutine(Dash());
@@ -98,10 +97,12 @@ public class PlayerController : MonoBehaviour
     {
         canDash = false;
         pState.dashing = true;
+
         anim.SetTrigger("Dashing");
         rb.gravityScale = 0;
-        rb.velocity = new Vector2(transform.localScale.x * dashSpeed, 0);
+        rb.velocity = new Vector2(-transform.localScale.x * dashSpeed, 0);
         yield return new WaitForSeconds(dashTime);
+
         rb.gravityScale = gravity;
         pState.dashing = false;
         yield return new WaitForSeconds(dashCooldown);
@@ -148,7 +149,6 @@ public class PlayerController : MonoBehaviour
         }
         anim.SetBool("isJumping", !IsGrounded());
     }
-
 
     private bool IsGrounded()
     {
