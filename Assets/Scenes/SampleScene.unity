@@ -1613,6 +1613,7 @@ GameObject:
   - component: {fileID: 1915927189}
   - component: {fileID: 1915927190}
   - component: {fileID: 1915927191}
+  - component: {fileID: 1915927192}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -1721,15 +1722,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 814ad2371d49d794b9fc8f4e5411e674, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 2
+  maxJump: 2
+  jumpForce: 10
   groundCheck: {fileID: 326417575}
   groundCheckY: 0.2
-  groundCheckX: 0.2
-  speed: 2
-  jumpForce: 10
+  groundCheckX: 0.5
   collisionMask:
     serializedVersion: 2
     m_Bits: 64
-  maxJump: 2
+  dashSpeed: 20
+  dashTime: 0.2
+  dashCooldown: 0.3
 --- !u!50 &1915927190
 Rigidbody2D:
   serializedVersion: 4
@@ -1792,6 +1796,20 @@ CapsuleCollider2D:
   m_Offset: {x: 0.033699334, y: -0.21619946}
   m_Size: {x: 0.6737937, y: 1.4103807}
   m_Direction: 0
+--- !u!114 &1915927192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1915927185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 982fbdf866d96124a9009ed1baa82347, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumping: 0
+  dashing: 0
 --- !u!1 &1951058901
 GameObject:
   m_ObjectHideFlags: 0

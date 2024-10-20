@@ -31,6 +31,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float dashSpeed;
     [SerializeField] private float dashTime;
     [SerializeField] private float dashCooldown;
+
+    [SerializeField] GameObject dashEffect;
     private float gravity;
     [Space(5)]
 
@@ -101,6 +103,7 @@ public class PlayerController : MonoBehaviour
         anim.SetTrigger("Dashing");
         rb.gravityScale = 0;
         rb.velocity = new Vector2(-transform.localScale.x * dashSpeed, 0);
+        /*if (IsGrounded())*/ Instantiate(dashEffect, transform);
         yield return new WaitForSeconds(dashTime);
 
         rb.gravityScale = gravity;
