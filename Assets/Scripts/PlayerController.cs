@@ -53,10 +53,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float recoilXSpeed = 100;
     [SerializeField] float recoilYSpeed = 100;
     int stepXRecoilded, stepYRecoilded;
+    [Space(5)]
+
+    [Header("Health Setting")]
+    public int health;
+    public int maxHealth;
+    [Space(5)]
 
     private float xAxis, yAxis;
     Animator anim;
-    PlayerStateList pState;
+    public PlayerStateList pState;
     private Rigidbody2D rb;
 
     public static PlayerController instance;
@@ -82,6 +88,7 @@ public class PlayerController : MonoBehaviour
         pState = GetComponent<PlayerStateList>();
         jumpLeft = maxJump;
         gravity = rb.gravityScale;
+        health = maxHealth;
     }
 
     private void Update()
@@ -114,7 +121,14 @@ public class PlayerController : MonoBehaviour
             dashed = false;
         }
     }
-
+     IEnumerator StopTakingDamage()
+    {
+        pState.invincible = true;
+        anim.SetTrigger("takeDamage");
+        ClampHealth();
+        yield return new WaitForSeconds(1f);
+        pState.invincible = false;
+    }
     IEnumerator Dash()
     {
         canDash = false;
@@ -315,5 +329,14 @@ public class PlayerController : MonoBehaviour
     {
         stepYRecoilded = 0;
         pState.recoilingY = false;
+    }
+    public void TakeDamage(float _damage)
+    {
+        health -= Mathf.RoundToInt(_damage);
+        StartCoroutine(StopTakingDamage());  
+    }
+    void ClampHealth()
+    {
+        health = Mathf.Clamp(health, 0, maxHealth);
     }
 }

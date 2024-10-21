@@ -1,0 +1,15 @@
+version: 2
+type: animation
+name: Recoil
+consistent_sprite_size: true
+enable_borders: false
+use_sprite_name: false
+sprites: 8
+0	Recoil_000.png
+1	Recoil_001.png
+2	Recoil_002.png
+3	Recoil_003.png
+4	Recoil_004.png
+5	Recoil_005.png
+6	Recoil_006.png
+7	Recoil_007.png
