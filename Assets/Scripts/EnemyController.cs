@@ -47,6 +47,7 @@ public class EnemyController : MonoBehaviour
         if (!isRecoiling)
         {
             rb.AddForce(-_hitForce * recoilFactor * _hitDirection);
+            isRecoiling = true;
         }
     }
 
@@ -55,6 +56,7 @@ public class EnemyController : MonoBehaviour
         if (_other.CompareTag("Player") && !PlayerController.instance.pState.invincible)
         {
             Attack();
+            PlayerController.instance.HitStopTime(0, 5, 0.5f);
         }
     }
 

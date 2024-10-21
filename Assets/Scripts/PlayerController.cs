@@ -10,6 +10,7 @@ using UnityEngine.EventSystems;
 public class PlayerController : MonoBehaviour
 {
 
+    
     [Header("Horizontal Setting")]
     [SerializeField] private float speed = 2f;
     [Space(5)]
@@ -67,7 +68,8 @@ public class PlayerController : MonoBehaviour
 
     public static PlayerController instance;
 
-
+    bool restoreTime;
+    float restoreTimeSpeed;
 
     private void Awake()
     {
@@ -88,7 +90,7 @@ public class PlayerController : MonoBehaviour
         pState = GetComponent<PlayerStateList>();
         jumpLeft = maxJump;
         gravity = rb.gravityScale;
-        health = maxHealth;
+        Health = maxHealth;
     }
 
     private void Update()
@@ -100,13 +102,55 @@ public class PlayerController : MonoBehaviour
         Flip();
         StartDash();
         Attack();
+        RestoreTimeScale();
+        Debug.Log(Time.timeScale);
     }
 
+    private void FixedUpdate()
+    {
+        if(pState.dashing) return;
+        Recoil();
+    }
     private void Movement()
     {
         var horizontalInput = Input.GetAxis("Horizontal");
         rb.velocity = new Vector2(horizontalInput * speed, rb.velocity.y);
         anim.SetBool("isRunning", rb.velocity.x != 0 && IsGrounded());
+    }
+
+
+    private void RestoreTimeScale()
+    {
+        if (restoreTime)
+        {
+            if(Time.timeScale < 1)
+            {
+                Time.timeScale += Time.deltaTime * restoreTimeSpeed;
+            } else
+            {
+                Time.timeScale = 1;
+                restoreTime = false;
+            }
+        }
+    }
+    public void HitStopTime(float _newTimeScale, int _restoreSpeed, float _delay)
+    {
+        restoreTimeSpeed = _restoreSpeed;
+        Time.timeScale = _newTimeScale;
+        if(_delay > 0)
+        {
+            StopCoroutine(StartTimeAgain(_delay));
+            StartCoroutine(StartTimeAgain(_delay));
+        } else
+        {
+            restoreTime = true;
+        }
+    }
+
+    IEnumerator StartTimeAgain(float _delay)
+    {
+        restoreTime = true;
+        yield return new WaitForSeconds(_delay);
     }
 
     private void StartDash()
@@ -117,18 +161,31 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(Dash());
             dashed = true;
         }
-        if (IsGrounded()) {
+        if (IsGrounded())
+        {
             dashed = false;
         }
     }
-     IEnumerator StopTakingDamage()
+    IEnumerator StopTakingDamage()
     {
         pState.invincible = true;
         anim.SetTrigger("takeDamage");
-        ClampHealth();
+
         yield return new WaitForSeconds(1f);
         pState.invincible = false;
     }
+    public int Health
+    {
+        get { return health; }
+        set
+        {
+            if (health != value)
+            {
+                health = Mathf.Clamp(value, 0, maxHealth);
+            }
+        }
+    }
+
     IEnumerator Dash()
     {
         canDash = false;
@@ -151,7 +208,7 @@ public class PlayerController : MonoBehaviour
     {
         xAxis = Input.GetAxisRaw("Horizontal");
         yAxis = Input.GetAxisRaw("Vertical");
-        attack = Input.GetMouseButtonDown(0);
+        attack = Input.GetButtonDown("Attack");
     }
     private void Flip()
     {
@@ -219,7 +276,8 @@ public class PlayerController : MonoBehaviour
             {
                 Hit(SideAttackTransform, SideAttackArea, ref pState.recoilingX, recoilXSpeed);
                 Instantiate(slashEffect, SideAttackTransform);
-            } else if (yAxis > 0)
+            }
+            else if (yAxis > 0)
             {
                 Hit(UpAttackTransform, UpAttackArea, ref pState.recoilingY, recoilYSpeed);
                 SlashEffectAtAngle(slashEffect, -90, UpAttackTransform);
@@ -271,7 +329,8 @@ public class PlayerController : MonoBehaviour
             if (pState.lookingLeft)
             {
                 rb.velocity = new Vector2(recoilXSpeed, 0);
-            } else
+            }
+            else
             {
                 rb.velocity = new Vector2(-recoilXSpeed, 0);
             }
@@ -297,7 +356,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //Stop recoil
-        if(pState.recoilingX && stepXRecoilded < recoilXStep)
+        if (pState.recoilingX && stepXRecoilded < recoilXStep)
         {
             stepXRecoilded++;
         }
@@ -305,7 +364,7 @@ public class PlayerController : MonoBehaviour
         {
             StopRecoilX();
         }
-        if(pState.recoilingY && stepYRecoilded < recoilYStep)
+        if (pState.recoilingY && stepYRecoilded < recoilYStep)
         {
             stepYRecoilded++;
         }
@@ -319,7 +378,7 @@ public class PlayerController : MonoBehaviour
         }
 
     }
-    
+
     private void StopRecoilX()
     {
         stepXRecoilded = 0;
@@ -332,11 +391,7 @@ public class PlayerController : MonoBehaviour
     }
     public void TakeDamage(float _damage)
     {
-        health -= Mathf.RoundToInt(_damage);
-        StartCoroutine(StopTakingDamage());  
-    }
-    void ClampHealth()
-    {
-        health = Mathf.Clamp(health, 0, maxHealth);
+        Health -= Mathf.RoundToInt(_damage);
+        StartCoroutine(StopTakingDamage());
     }
 }
