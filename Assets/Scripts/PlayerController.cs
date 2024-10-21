@@ -59,13 +59,18 @@ public class PlayerController : MonoBehaviour
     [Header("Health Setting")]
     public int health;
     public int maxHealth;
+    [SerializeField] float hitFlashSpeed;
     [Space(5)]
+
+    private SpriteRenderer sr;
 
     private float xAxis, yAxis;
     Animator anim;
     public PlayerStateList pState;
     private Rigidbody2D rb;
 
+
+    
     public static PlayerController instance;
 
     bool restoreTime;
@@ -88,6 +93,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         pState = GetComponent<PlayerStateList>();
+        sr = GetComponent<SpriteRenderer>();
         jumpLeft = maxJump;
         gravity = rb.gravityScale;
         Health = maxHealth;
@@ -103,6 +109,7 @@ public class PlayerController : MonoBehaviour
         StartDash();
         Attack();
         RestoreTimeScale();
+        FlashWhileInvincible();
         Debug.Log(Time.timeScale);
     }
 
@@ -145,6 +152,12 @@ public class PlayerController : MonoBehaviour
         {
             restoreTime = true;
         }
+    }
+
+    void FlashWhileInvincible()
+    {
+        sr.material.color = pState.invincible ? 
+            Color.Lerp(Color.white, Color.black, Mathf.PingPong(Time.time * hitFlashSpeed, 1.0f)) : Color.white;
     }
 
     IEnumerator StartTimeAgain(float _delay)
