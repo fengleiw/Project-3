@@ -4,14 +4,12 @@ using UnityEngine;
 
 public class Zombie : EnemyController
 {
-    void Start()
-    {
-        rb.gravityScale = 12f;
-    }
+    
 
-    protected override void Awake()
+    protected override void Start()
     {
-        base.Awake();
+        base.Start();
+        rb.gravityScale = 12f;
     }
     // Update is called once per frame
     protected override void Update()

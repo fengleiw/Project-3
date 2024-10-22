@@ -15,7 +15,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] protected PlayerController player;
     [SerializeField] protected float speed;
 
-    protected virtual void Awake()
+    protected virtual void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         player = PlayerController.instance;
