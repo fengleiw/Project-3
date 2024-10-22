@@ -62,13 +62,16 @@ public class PlayerController : MonoBehaviour
     public delegate void OnHealthChangeDelegate();
     [HideInInspector] public OnHealthChangeDelegate onHealthChangeCallback;
     [SerializeField] float hitFlashSpeed;
+
+    float healTimer;
+    [SerializeField] float timeToHeal;
     [Space(5)]
 
     private SpriteRenderer sr;
 
     private float xAxis, yAxis;
     Animator anim;
-    public PlayerStateList pState;
+    [HideInInspector] public PlayerStateList pState;
     private Rigidbody2D rb;
 
     public static PlayerController instance;
@@ -110,7 +113,8 @@ public class PlayerController : MonoBehaviour
         Attack();
         RestoreTimeScale();
         FlashWhileInvincible();
-        Debug.Log(Time.timeScale);
+        Heal();
+        Debug.Log(Health);
     }
 
     private void FixedUpdate()
@@ -241,6 +245,25 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void Heal()
+    {
+        if(Input.GetButton("Healing") && Health < maxHealth && !pState.jumping && !pState.dashing)
+        {
+            pState.healing = true;
+
+            healTimer += Time.deltaTime;
+            if(healTimer >= timeToHeal)
+            {
+                Health++;
+                healTimer = 0;
+            }
+
+        } else
+        {
+            pState.healing = false;
+            healTimer = 0;
+        }
+    }
     private void Jump()
     {
         var jumpInput = Input.GetButtonDown("Jump");
