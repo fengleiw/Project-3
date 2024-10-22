@@ -1,0 +1,13 @@
+version: 2
+type: animation
+name: Dreamer Lift
+consistent_sprite_size: true
+enable_borders: false
+use_sprite_name: false
+sprites: 6
+0	Dreamer Lift_000.png
+1	Dreamer Lift_001.png
+2	Dreamer Lift_002.png
+3	Dreamer Lift_003.png
+4	Dreamer Lift_004.png
+5	Dreamer Lift_005.png

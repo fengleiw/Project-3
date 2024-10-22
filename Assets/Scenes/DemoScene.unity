@@ -1866,12 +1866,11 @@ GameObject:
   - component: {fileID: 1507875231}
   - component: {fileID: 1507875230}
   - component: {fileID: 1507875229}
-  - component: {fileID: 1507875233}
   - component: {fileID: 1507875234}
   - component: {fileID: 1507875235}
   m_Layer: 7
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1970,51 +1969,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &1507875233
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1507875228}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.009678841, y: 0.004523635}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.85885906, y: 0.7786701}
-  m_EdgeRadius: 0
 --- !u!114 &1507875234
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2063,7 +2017,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.0011978149}
@@ -2500,7 +2454,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -347, y: 200}
+  m_AnchoredPosition: {x: -287.7, y: 200}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1784020523
@@ -2524,7 +2478,7 @@ MonoBehaviour:
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 40, y: 40}
-  m_Spacing: {x: 1, y: 1}
+  m_Spacing: {x: -25, y: 1}
   m_Constraint: 2
   m_ConstraintCount: 1
 --- !u!1 &1808587019
@@ -2829,7 +2783,7 @@ Transform:
   m_GameObject: {fileID: 1915927185}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.248, y: 5.76, z: 0}
+  m_LocalPosition: {x: 1.08, y: 5.76, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2882,6 +2836,10 @@ MonoBehaviour:
   health: 0
   maxHealth: 10
   hitFlashSpeed: 5
+  timeToHeal: 1
+  mana: 2
+  manaDrainSpeed: 0.2
+  manaGain: 0.3
   pState: {fileID: 0}
 --- !u!50 &1915927190
 Rigidbody2D:
@@ -2963,6 +2921,7 @@ MonoBehaviour:
   recoilingY: 0
   lookingLeft: 0
   invincible: 0
+  healing: 0
 --- !u!1 &1951058901
 GameObject:
   m_ObjectHideFlags: 0

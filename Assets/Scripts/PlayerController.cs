@@ -6,6 +6,7 @@ using System.Net.Sockets;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -67,6 +68,30 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float timeToHeal;
     [Space(5)]
 
+
+    [Header("Mana Setting")]
+    [SerializeField] UnityEngine.UI.Image manaStorage;
+    [SerializeField] float mana;
+    [SerializeField] float manaDrainSpeed;
+    [SerializeField] float manaGain;
+
+    [Space(5)]
+
+    [Header("Spell Setting")]
+    [SerializeField] float manaSpellCost = 0.3f;
+    [SerializeField] float timeBetweenCast;
+    [SerializeField] float spellDamage;
+    [SerializeField] float downSpellForce;
+    float TimeSinceCast;
+    [SerializeField] GameObject sideSpellFireBall;
+    [SerializeField] GameObject upSpellBloom;
+    [SerializeField] GameObject downSpellFireBall;
+    [Space(5)]
+
+
+
+
+
     private SpriteRenderer sr;
 
     private float xAxis, yAxis;
@@ -100,6 +125,9 @@ public class PlayerController : MonoBehaviour
         jumpLeft = maxJump;
         gravity = rb.gravityScale;
         Health = maxHealth;
+        Mana = mana;
+        manaStorage.fillAmount = Mana;
+        pState.lookingLeft = true;
     }
 
     private void Update()
@@ -114,6 +142,7 @@ public class PlayerController : MonoBehaviour
         RestoreTimeScale();
         FlashWhileInvincible();
         Heal();
+        CastSpell();
         Debug.Log(Health);
     }
 
@@ -207,6 +236,22 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    float Mana
+    {
+        get
+        {
+            return mana;
+        }
+        set
+        {
+            if(mana != value)
+            {
+                mana = Mathf.Clamp(value, 0, 1);
+                manaStorage.fillAmount = Mana;
+            }
+        }
+    }
+
     IEnumerator Dash()
     {
         canDash = false;
@@ -247,9 +292,10 @@ public class PlayerController : MonoBehaviour
 
     private void Heal()
     {
-        if(Input.GetButton("Healing") && Health < maxHealth && !pState.jumping && !pState.dashing)
+        if(Input.GetButton("Healing") && Health < maxHealth && !pState.jumping && !pState.dashing && Mana > 0)
         {
             pState.healing = true;
+            //healing animation anim.SetBool("Healing", true);
 
             healTimer += Time.deltaTime;
             if(healTimer >= timeToHeal)
@@ -257,6 +303,9 @@ public class PlayerController : MonoBehaviour
                 Health++;
                 healTimer = 0;
             }
+            //Dain mana
+            Mana -= Time.deltaTime * manaDrainSpeed;
+
 
         } else
         {
@@ -348,7 +397,13 @@ public class PlayerController : MonoBehaviour
         {
             if (objectsToHit[i].GetComponent<EnemyController>() != null)
             {
-                objectsToHit[i].GetComponent<EnemyController>().EnemyHit(damage, (transform.position - objectsToHit[i].transform.position).normalized, recoilStrength);
+                objectsToHit[i].GetComponent<EnemyController>().EnemyHit
+                    (damage, (transform.position - objectsToHit[i].transform.position).normalized, recoilStrength);
+
+                if (objectsToHit[i].CompareTag("Enemy"))
+                {
+                    Mana += manaGain;
+                }
             }
         }
     }
@@ -433,5 +488,75 @@ public class PlayerController : MonoBehaviour
     {
         Health -= Mathf.RoundToInt(_damage);
         StartCoroutine(StopTakingDamage());
+    }
+
+    void CastSpell()
+    {
+        if(Input.GetButtonDown("CastSpell") && TimeSinceCast >= timeBetweenCast && Mana >= manaSpellCost)
+        {
+            pState.casting = true;
+            TimeSinceCast = 0f;
+            StartCoroutine(CastCoroutine());
+        } else
+        {
+            TimeSinceCast += Time.deltaTime;
+        }
+
+        if (IsGrounded()) {
+            downSpellFireBall.SetActive(false);
+        }
+
+        //Down spell active -> force olayer down until grounded
+        if (downSpellFireBall.activeInHierarchy)
+        {
+            rb.velocity += downSpellForce * Vector2.down;
+        }
+    }
+    IEnumerator CastCoroutine()
+    {
+        anim.SetBool("Casting", true);
+        yield return new WaitForSeconds(0.25f /*Casting Time, need fixed*/);
+
+        //Side Spell
+        if (yAxis == 0 || (yAxis < 0 & IsGrounded()))
+        {
+            GameObject _fireBall = Instantiate(sideSpellFireBall, SideAttackTransform.position, Quaternion.identity);
+
+            //Flip spell
+            if (!pState.lookingLeft)
+            {
+                _fireBall.transform.eulerAngles = Vector3.zero;
+            }
+            else
+            {
+                _fireBall.transform.eulerAngles = new Vector2(_fireBall.transform.eulerAngles.x, 180);
+            }
+            pState.recoilingX = true;
+        }
+
+        //Up spell
+        else if (yAxis > 0) {
+            Instantiate(upSpellBloom, transform);
+            rb.velocity = Vector2.zero;
+        }
+
+        //Down Spell
+        else if(yAxis < 0 && !IsGrounded())
+        {
+            downSpellFireBall.SetActive(true);
+        }
+
+        Mana -= manaSpellCost;
+        yield return new WaitForSeconds(0.35f);
+        anim.SetBool("Casting", false);
+        pState.casting = false;
+    }
+
+    private void OnTriggerEnter2D(Collider2D _collision)
+    {
+        if(_collision.GetComponent<EnemyController>() != null && pState.casting)
+        {
+            _collision.GetComponent<EnemyController>().EnemyHit(spellDamage, (_collision.transform.position - transform.position).normalized, -recoilYSpeed);
+        }
     }
 }

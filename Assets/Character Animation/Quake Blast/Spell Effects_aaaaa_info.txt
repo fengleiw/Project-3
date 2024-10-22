@@ -1,0 +1,17 @@
+version: 2
+type: animation
+name: Quake 2 Mega
+consistent_sprite_size: true
+enable_borders: false
+use_sprite_name: false
+sprites: 10
+0	Quake 2 Mega_000.png
+1	Quake 2 Mega_001.png
+2	Quake 2 Mega_002.png
+3	Quake 2 Mega_003.png
+4	Quake 2 Mega_004.png
+5	Quake 2 Mega_005.png
+6	Quake 2 Mega_006.png
+7	Quake 2 Mega_007.png
+8	Quake 2 Mega_008.png
+9	Quake 2 Mega_009.png

@@ -1,0 +1,11 @@
+version: 2
+type: animation
+name: Ball
+consistent_sprite_size: true
+enable_borders: false
+use_sprite_name: false
+sprites: 4
+0	Ball_000.png
+1	Ball_001.png
+2	Ball_002.png
+3	Ball_003.png
