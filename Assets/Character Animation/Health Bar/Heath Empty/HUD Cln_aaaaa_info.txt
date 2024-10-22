@@ -1,0 +1,8 @@
+version: 2
+type: animation
+name: Health Empty
+consistent_sprite_size: true
+enable_borders: false
+use_sprite_name: false
+sprites: 1
+0	Health Empty_000.png
