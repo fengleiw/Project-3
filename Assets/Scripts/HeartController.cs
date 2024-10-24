@@ -12,7 +12,10 @@ public class HeartController : MonoBehaviour
     public GameObject heartContainerPrefab;
 
 
-
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
     void Start()
     {
         player = PlayerController.instance;

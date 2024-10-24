@@ -157,14 +157,17 @@ public class PlayerController : MonoBehaviour
         if (pState.cutScene) return;
      
         GetInput();
-        if (pState.dashing) return;
+        RestoreTimeScale();
         UpdateJumpVariable();
+
+        if (pState.dashing) return;
+        
         Movement();
         Jump();
         Flip();
         StartDash();
         Attack();
-        RestoreTimeScale();
+        
         FlashWhileInvincible();
         Heal();
         CastSpell();
@@ -437,19 +440,21 @@ public class PlayerController : MonoBehaviour
 
             if (yAxis == 0 || yAxis < 0 && IsGrounded())
             {
+                int _recoilLeftOrRight = pState.lookingLeft ? 1: -1;
+
                 anim.SetTrigger("Attacking");
-                Hit(SideAttackTransform, SideAttackArea, ref pState.recoilingX, recoilXSpeed);
+                Hit(SideAttackTransform, SideAttackArea, ref pState.recoilingX,Vector2.left *_recoilLeftOrRight, recoilXSpeed);
                 Instantiate(slashEffect, SideAttackTransform);
             }
             else if (yAxis > 0)
             {
-                Hit(UpAttackTransform, UpAttackArea, ref pState.recoilingY, recoilYSpeed);
+                Hit(UpAttackTransform, UpAttackArea, ref pState.recoilingY,Vector2.up, recoilYSpeed);
                 Instantiate(upSlashEffect, UpAttackTransform);
                 anim.SetTrigger("upSlash");
             }
             else if (yAxis < 0 && !IsGrounded())
             {
-                Hit(DownAttackTransform, DownAttackArea, ref pState.recoilingY, recoilYSpeed);
+                Hit(DownAttackTransform, DownAttackArea, ref pState.recoilingY, Vector2.down, recoilYSpeed);
                 
                 Instantiate(downSlashEffect, DownAttackTransform);
                 anim.SetTrigger("downSlash");
@@ -464,19 +469,18 @@ public class PlayerController : MonoBehaviour
         Gizmos.DrawWireCube(UpAttackTransform.position, UpAttackArea);
         Gizmos.DrawWireCube(DownAttackTransform.position, DownAttackArea);
     }
-    private void Hit(Transform _attackTransform, Vector2 _attackArea, ref bool _recoilDir, float recoilStrength)
+    private void Hit(Transform _attackTransform, Vector2 _attackArea, ref bool _recoilBool,Vector2 _recoilDir, float recoilStrength)
     {
         Collider2D[] objectsToHit = Physics2D.OverlapBoxAll(_attackTransform.position, _attackArea, 0, attackableLayer);
         if (objectsToHit.Length > 0)
         {
-            _recoilDir = true;
+            _recoilBool = true;
         }
         for (int i = 0; i < objectsToHit.Length; i++)
         {
             if (objectsToHit[i].GetComponent<EnemyController>() != null)
             {
-                objectsToHit[i].GetComponent<EnemyController>().EnemyHit
-                    (damage, (transform.position - objectsToHit[i].transform.position).normalized, recoilStrength);
+                objectsToHit[i].GetComponent<EnemyController>().EnemyHit(damage, _recoilDir, recoilStrength);
 
                 if (objectsToHit[i].CompareTag("Enemy"))
                 {

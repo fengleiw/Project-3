@@ -1,0 +1,12 @@
+version: 2
+type: animation
+name: Idle
+consistent_sprite_size: true
+enable_borders: false
+use_sprite_name: false
+sprites: 5
+0	Idle_000.png
+1	Idle_001.png
+2	Idle_002.png
+3	Idle_003.png
+4	Idle_004.png

@@ -11,23 +11,38 @@ public class EnemyController : MonoBehaviour
     [SerializeField] protected float damage;
     protected float recoilTimer;
     protected Rigidbody2D rb;
-
-    [SerializeField] protected PlayerController player;
+    protected SpriteRenderer sr;
+    [HideInInspector][SerializeField] protected PlayerController player;
     [SerializeField] protected float speed;
 
+
+    protected enum EnemyStates
+    {
+        //Crawler
+        Crawler_Idle,
+        Crawler_Flip,
+        Crawler_Run,
+
+        //Buzzer
+        Buzzer_Idle,
+        Buzzer_Chase,
+        Buzzer_Stunned,
+        Buzzer_Death
+    }
+
+    protected EnemyStates currentEnemyState;
     protected virtual void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
         player = PlayerController.instance;
     }
 
     
     protected virtual void Update()
     {
-        if(health <= 0)
-        {
-            Destroy(gameObject);
-        }
+        
+
         if (isRecoiling)
         {
             if (recoilTimer < recoilLength)
@@ -38,16 +53,23 @@ public class EnemyController : MonoBehaviour
                 isRecoiling = false;
                 recoilTimer = 0;
             }
+        } else
+        {
+            UpdateEnemyState();
         }
     }
 
+
+    protected virtual void UpdateEnemyState()
+    {
+
+    }
     public virtual void EnemyHit(float _damage, Vector2 _hitDirection, float _hitForce)
     {
         health -= _damage;
         if (!isRecoiling)
         {
-            rb.AddForce(-_hitForce * recoilFactor * _hitDirection);
-            isRecoiling = true;
+            rb.velocity = (-_hitForce * recoilFactor * _hitDirection);
         }
     }
 
@@ -58,6 +80,11 @@ public class EnemyController : MonoBehaviour
             Attack();
             PlayerController.instance.HitStopTime(0, 5, 0.5f);
         }
+    }
+
+    protected virtual void ChangeState(EnemyStates _newState)
+    {
+        currentEnemyState = _newState;
     }
 
     protected virtual void Attack()
