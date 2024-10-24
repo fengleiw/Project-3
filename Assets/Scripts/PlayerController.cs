@@ -23,6 +23,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private int jumpBufferFrames;
     private int airJumpCounter = 0;
     [SerializeField] private int maxAirJumps;
+    [SerializeField] GameObject wingEffect;
+    [SerializeField] Transform wingEffectTransform;
     [Space(5)]
 
     [Header("Ground Check Setting")]
@@ -53,6 +55,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] LayerMask attackableLayer;
     [SerializeField] float damage;
     [SerializeField] GameObject slashEffect;
+    [SerializeField] GameObject downSlashEffect;
+    [SerializeField] GameObject upSlashEffect;
+    [Space(5)]
 
     [Header("Recoil Setting")]
     [SerializeField] int recoilXStep = 5;
@@ -143,7 +148,8 @@ public class PlayerController : MonoBehaviour
         Health = maxHealth;
         Mana = mana;
         manaStorage.fillAmount = Mana;
-        pState.lookingLeft = true; //fix wrong side spell
+        //fix wrong side spell
+        pState.lookingLeft = true;
     }
 
     private void Update()
@@ -286,7 +292,7 @@ public class PlayerController : MonoBehaviour
         int _dir = pState.lookingLeft ? 1 : -1;
         rb.velocity = new Vector2(-_dir * dashSpeed, 0);
         /*if (IsGrounded())*/
-        Instantiate(dashEffect, transform);
+        //Instantiate(dashEffect, transform);
         yield return new WaitForSeconds(dashTime);
 
         rb.gravityScale = gravity;
@@ -353,6 +359,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonUp("Jump") &&  rb.velocity.y > 0)
         {
             rb.velocity = new Vector2(rb.velocity.x, 0);
+           
             pState.jumping = false;
         }
         if (jumpBufferCounter > 0 && coyoteTimeCounter > 0 && !pState.jumping)
@@ -360,17 +367,28 @@ public class PlayerController : MonoBehaviour
             rb.velocity = new Vector3(rb.velocity.x, jumpForce);
             pState.jumping = true;
         }
-
+        //Double jump
         if (!IsGrounded() && airJumpCounter < maxAirJumps && Input.GetButtonDown("Jump"))
         {
             pState.jumping = true;
             airJumpCounter++;
             rb.velocity = new Vector3(rb.velocity.x, jumpForce);
+            anim.SetTrigger("doubleJump");
+            Instantiate(wingEffect, wingEffectTransform);
+            
         }
+        //if(!IsGrounded() && pState.jumping)
+        //{
+        //    anim.SetBool("isFalling", true);
+        //} else
+        //{
+        //    anim.SetBool("isFalling", false);
+        //}
 
 
 
         anim.SetBool("isJumping", !IsGrounded());
+       
     }
 
     void UpdateJumpVariable()
@@ -415,22 +433,26 @@ public class PlayerController : MonoBehaviour
         if (attack && timeSinceAttack >= timeBetweenAttack)
         {
             timeSinceAttack = 0;
-            anim.SetTrigger("Attacking");
+            
 
             if (yAxis == 0 || yAxis < 0 && IsGrounded())
             {
+                anim.SetTrigger("Attacking");
                 Hit(SideAttackTransform, SideAttackArea, ref pState.recoilingX, recoilXSpeed);
                 Instantiate(slashEffect, SideAttackTransform);
             }
             else if (yAxis > 0)
             {
                 Hit(UpAttackTransform, UpAttackArea, ref pState.recoilingY, recoilYSpeed);
-                SlashEffectAtAngle(slashEffect, -90, UpAttackTransform);
+                Instantiate(upSlashEffect, UpAttackTransform);
+                anim.SetTrigger("upSlash");
             }
             else if (yAxis < 0 && !IsGrounded())
             {
                 Hit(DownAttackTransform, DownAttackArea, ref pState.recoilingY, recoilYSpeed);
-                SlashEffectAtAngle(slashEffect, 90, DownAttackTransform);
+                
+                Instantiate(downSlashEffect, DownAttackTransform);
+                anim.SetTrigger("downSlash");
             }
         }
     }

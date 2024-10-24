@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 627199190358867331}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.033, y: -0.823, z: 0}
+  m_LocalPosition: {x: 0.033, y: -0.876, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -221,6 +221,37 @@ MonoBehaviour:
   hitForce: 0
   speed: 0
   lifeTime: 10
+--- !u!1 &2485754165325636600
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2488657486269031381}
+  m_Layer: 0
+  m_Name: WingTransform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2488657486269031381
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2485754165325636600}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.04, y: -0.36, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4046258105728684519}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2561052518795806566
 GameObject:
   m_ObjectHideFlags: 0
@@ -261,6 +292,7 @@ Transform:
   - {fileID: 2015589313953155055}
   - {fileID: 6369583678117844295}
   - {fileID: 1788035327626097624}
+  - {fileID: 2488657486269031381}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5981094605454994027
@@ -349,15 +381,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  maxJump: 2
   jumpForce: 10
+  coyoteTime: 0.1
+  jumpBufferFrames: 8
+  maxAirJumps: 1
+  wingEffect: {fileID: 6696375086162116074, guid: 570c8f882d8a03347824131c5962f7b4, type: 3}
+  wingEffectTransform: {fileID: 2488657486269031381}
   groundCheck: {fileID: 366397364557955512}
   groundCheckY: 0.2
   groundCheckX: 0.5
   collisionMask:
     serializedVersion: 2
     m_Bits: 64
-  dashSpeed: 20
+  dashSpeed: 25
   dashTime: 0.2
   dashCooldown: 0.3
   dashEffect: {fileID: 4988909562643184989, guid: 3209a28bebdabee4b94584943c29bd00, type: 3}
@@ -372,6 +408,8 @@ MonoBehaviour:
     m_Bits: 128
   damage: 2
   slashEffect: {fileID: 7212234313915095894, guid: 693809be115b6ae43843d548e24195de, type: 3}
+  downSlashEffect: {fileID: 794337618657797663, guid: bd7bf4d31566d094584674029a2f6720, type: 3}
+  upSlashEffect: {fileID: 2892248903808272639, guid: 182e5e238bb48cf4497411dd4b9a200c, type: 3}
   recoilXStep: 5
   recoilYStep: 5
   recoilXSpeed: 10
@@ -391,13 +429,6 @@ MonoBehaviour:
   sideSpellFireBall: {fileID: 1037116326284645799, guid: af7108c091a1a6041a22bcc35e4e58ff, type: 3}
   upSpellBloom: {fileID: 3111381295381412854, guid: 52ee7aca50455014d83fa987af18fb26, type: 3}
   downSpellFireBall: {fileID: 2018143056862378723}
-  wallSlidingSpeed: 2
-  wallLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  wallCheck: {fileID: 0}
-  wallJumpingDuration: 0
-  wallJumpingPower: {x: 0, y: 0}
   pState: {fileID: 0}
 --- !u!50 &7052286583874370150
 Rigidbody2D:
@@ -458,8 +489,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.033699334, y: -0.21619946}
-  m_Size: {x: 0.6737937, y: 1.4103807}
+  m_Offset: {x: 0.033699334, y: -0.22901124}
+  m_Size: {x: 0.6737937, y: 1.1998852}
   m_Direction: 0
 --- !u!114 &6241003381922019773
 MonoBehaviour:
@@ -481,6 +512,8 @@ MonoBehaviour:
   invincible: 0
   healing: 0
   casting: 0
+  cutScene: 0
+  falling: 0
 --- !u!1 &5084078667868134574
 GameObject:
   m_ObjectHideFlags: 0
@@ -506,7 +539,7 @@ Transform:
   m_GameObject: {fileID: 5084078667868134574}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.98, z: 0}
+  m_LocalPosition: {x: 0, y: 0.44, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

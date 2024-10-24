@@ -1,0 +1,445 @@
+Using pre-set license
+Built from '2022.3/staging' branch; Version is '2022.3.27f1 (73effa14754f) revision 7598074'; Using compiler version '192829333'; Build Type 'Release'
+OS: 'Windows 11  (10.0.22631) 64bit CoreSingleLanguage' Language: 'en' Physical Memory: 15724 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 1
+
+COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\2022.3.27f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker11
+-projectPath
+E:/HK
+-logFile
+Logs/AssetImportWorker11.log
+-srvPort
+52407
+Successfully changed project path to: E:/HK
+E:/HK
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+    "memorysetup-allocator-temp-initial-block-size-main=262144"
+    "memorysetup-allocator-temp-initial-block-size-worker=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gfx=262144"
+Player connection [23764] Host "[IP] 192.168.1.192 [Port] 0 [Flags] 2 [Guid] 4283008228 [EditorId] 4283008228 [Version] 1048832 [Id] WindowsEditor(7,LeiFeng) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
+
+Player connection [23764] Host "[IP] 192.168.1.192 [Port] 0 [Flags] 2 [Guid] 4283008228 [EditorId] 4283008228 [Version] 1048832 [Id] WindowsEditor(7,LeiFeng) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
+
+[Physics::Module] Initialized MultithreadedJobDispatcher with 11 workers.
+Refreshing native plugins compatible for Editor in 24.69 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2022.3.27f1 (73effa14754f)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2022.3.27f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path E:/HK/Assets
+GfxDevice: creating device client; threaded=0; jobified=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce GTX 1650 (ID=0x1f9d)
+    Vendor:   NVIDIA
+    VRAM:     3937 MB
+    Driver:   32.0.15.6590
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2022.3.27f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2022.3.27f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/2022.3.27f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56060
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.27f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.27f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.013283 seconds.
+- Loaded All Assemblies, in  0.524 seconds
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  0.413 seconds
+Domain Reload Profiling: 933ms
+	BeginReloadAssembly (143ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (0ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (1ms)
+	RebuildCommonClasses (49ms)
+	RebuildNativeTypeToScriptingClass (16ms)
+	initialDomainReloadingComplete (100ms)
+	LoadAllAssembliesAndSetupDomain (212ms)
+		LoadAssemblies (140ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (209ms)
+			TypeCache.Refresh (207ms)
+				TypeCache.ScanAssembly (189ms)
+			ScanForSourceGeneratedMonoScriptInfo (0ms)
+			ResolveRequiredComponents (1ms)
+	FinalizeReload (413ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (335ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (16ms)
+			SetLoadedEditorAssemblies (7ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (3ms)
+			ProcessInitializeOnLoadAttributes (242ms)
+			ProcessInitializeOnLoadMethodAttributes (66ms)
+			AfterProcessingInitializeOnLoad (0ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (0ms)
+========================================================================
+Worker process is ready to serve import requests
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.992 seconds
+Refreshing native plugins compatible for Editor in 7.17 ms, found 4 plugins.
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Package Manager log level set to [2]
+[Package Manager] Server::EnsureServerProcessIsRunning -- launch failed, reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] UpmClient::Send -- Unable to send message (not connected to UPM process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  1.141 seconds
+Domain Reload Profiling: 2131ms
+	BeginReloadAssembly (222ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (11ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (32ms)
+	RebuildCommonClasses (44ms)
+	RebuildNativeTypeToScriptingClass (14ms)
+	initialDomainReloadingComplete (60ms)
+	LoadAllAssembliesAndSetupDomain (648ms)
+		LoadAssemblies (452ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (317ms)
+			TypeCache.Refresh (256ms)
+				TypeCache.ScanAssembly (233ms)
+			ScanForSourceGeneratedMonoScriptInfo (42ms)
+			ResolveRequiredComponents (17ms)
+	FinalizeReload (1142ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (900ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (10ms)
+			SetLoadedEditorAssemblies (6ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (113ms)
+			ProcessInitializeOnLoadAttributes (635ms)
+			ProcessInitializeOnLoadMethodAttributes (124ms)
+			AfterProcessingInitializeOnLoad (12ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (9ms)
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.06 seconds
+Refreshing native plugins compatible for Editor in 8.46 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 5999 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 103 unused Assets / (0.9 MB). Loaded Objects now: 6452.
+Memory consumption went from 227.5 MB to 226.6 MB.
+Total: 5.959200 ms (FindLiveObjects: 0.499400 ms CreateObjectMapping: 0.257800 ms MarkObjects: 4.600900 ms  DeleteObjects: 0.600100 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:CustomObjectIndexerAttribute: 72b91833f83ae208fae7752999fa3104 -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 42558.083299 seconds.
+  path: Assets/Resources/Environments/Lifts/SpriteAtlasTexture-Lifts (Group 0)-2048x2048-fmt12.png
+  artifactKey: Guid(8db8de252f06a81408d205658c3a0b92) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Environments/Lifts/SpriteAtlasTexture-Lifts (Group 0)-2048x2048-fmt12.png using Guid(8db8de252f06a81408d205658c3a0b92) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a3b23c7acc474857e4a3a56e397dbd1c') in 0.093671 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 11.154098 seconds.
+  path: Assets/Resources/Environments/Lifts/SpriteAtlasTexture-Lifts (Group 0)-2048x2048-fmt12.png
+  artifactKey: Guid(8db8de252f06a81408d205658c3a0b92) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Environments/Lifts/SpriteAtlasTexture-Lifts (Group 0)-2048x2048-fmt12.png using Guid(8db8de252f06a81408d205658c3a0b92) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a67929183ce64233713f5c9b7115e5df') in 0.095374 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 14.287336 seconds.
+  path: Assets/Resources/Environments/Lifts/SpriteAtlasTexture-Lifts (Group 0)-2048x2048-fmt12.png
+  artifactKey: Guid(8db8de252f06a81408d205658c3a0b92) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Environments/Lifts/SpriteAtlasTexture-Lifts (Group 0)-2048x2048-fmt12.png using Guid(8db8de252f06a81408d205658c3a0b92) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9f59a43fe33842deea5ec83e36ddf8e5') in 0.028330 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 4
+========================================================================
+Received Import Request.
+  Time since last request: 15.986270 seconds.
+  path: Assets/Resources/Environments/Area specfic architecture/Forgotten Crossroads/cd_arch_01.png
+  artifactKey: Guid(adfda89a49e3e4f44b9e4622062d57da) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Environments/Area specfic architecture/Forgotten Crossroads/cd_arch_01.png using Guid(adfda89a49e3e4f44b9e4622062d57da) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fe5477a69f304edda2dbc21d4a05265c') in 0.040626 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.001292 seconds.
+  path: Assets/Resources/Environments/Area specfic architecture/Forgotten Crossroads/cd_archway_03.png
+  artifactKey: Guid(d01f23793dce2cf419f64dc4b8981358) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Environments/Area specfic architecture/Forgotten Crossroads/cd_archway_03.png using Guid(d01f23793dce2cf419f64dc4b8981358) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5cb445243412f41a5e7834133e1f5f8d') in 0.028980 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/Resources/Environments/Area specfic architecture/Forgotten Crossroads/cd_bone_wall_0005_01.png
+  artifactKey: Guid(9a2ebaeebe43c2d4891d8a807ba42db4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Environments/Area specfic architecture/Forgotten Crossroads/cd_bone_wall_0005_01.png using Guid(9a2ebaeebe43c2d4891d8a807ba42db4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0d8d99f68864b5f54c1c3531799423f1') in 0.031032 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/Resources/Environments/Area specfic architecture/Forgotten Crossroads/cd_egg_guard_corpse_01.png
+  artifactKey: Guid(148ec5e2d85f19943af57c075eab1814) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Environments/Area specfic architecture/Forgotten Crossroads/cd_egg_guard_corpse_01.png using Guid(148ec5e2d85f19943af57c075eab1814) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5eccc77bed8cc6fc56462aa6768d7ab3') in 0.031927 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000035 seconds.
+  path: Assets/Resources/Environments/Area specfic architecture/Forgotten Crossroads/cd_egg_guard_corpse_04.png
+  artifactKey: Guid(ce5c3469002a28545bfaf27c6910c0fa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Environments/Area specfic architecture/Forgotten Crossroads/cd_egg_guard_corpse_04.png using Guid(ce5c3469002a28545bfaf27c6910c0fa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a434acb7d53caad92dbe075577c2a8ba') in 0.033004 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000039 seconds.
+  path: Assets/Resources/Environments/Area specfic architecture/Forgotten Crossroads/cd_dead_guardians_01_0003_05.png
+  artifactKey: Guid(fa1a8a438493c7640b7317f31ac5eaed) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Environments/Area specfic architecture/Forgotten Crossroads/cd_dead_guardians_01_0003_05.png using Guid(fa1a8a438493c7640b7317f31ac5eaed) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f95b26bd2b904a6af78d71272f089ace') in 0.032044 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000029 seconds.
+  path: Assets/Resources/Environments/Area specfic architecture/Forgotten Crossroads/cd_dead_guardians_01_0004_04.png
+  artifactKey: Guid(3e0b89374710f3843b38110c05f7df80) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Environments/Area specfic architecture/Forgotten Crossroads/cd_dead_guardians_01_0004_04.png using Guid(3e0b89374710f3843b38110c05f7df80) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5e1b6961ecdce7b420045dde9687fcec') in 0.027899 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000036 seconds.
+  path: Assets/Resources/Environments/Area specfic architecture/Forgotten Crossroads/cd_bone_wall_0000_06.png
+  artifactKey: Guid(ef98fbbf155159a4c9d6b39db36fbf98) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Environments/Area specfic architecture/Forgotten Crossroads/cd_bone_wall_0000_06.png using Guid(ef98fbbf155159a4c9d6b39db36fbf98) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a1d54fbc04b5b3de158d3374e9ba57d4') in 0.032550 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Resources/Environments/Area specfic architecture/Forgotten Crossroads/cd_bridge_collapse_03.png
+  artifactKey: Guid(54acf1b080901444cb001d2852ff80af) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Environments/Area specfic architecture/Forgotten Crossroads/cd_bridge_collapse_03.png using Guid(54acf1b080901444cb001d2852ff80af) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '37593676c683bc1b48b0a0f20ca46f8d') in 0.027975 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Resources/Environments/Area specfic architecture/Forgotten Crossroads/cd_big_roof_0006_01.png
+  artifactKey: Guid(5b112d1124ba1c34d9d1710ccbc48e8f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Environments/Area specfic architecture/Forgotten Crossroads/cd_big_roof_0006_01.png using Guid(5b112d1124ba1c34d9d1710ccbc48e8f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b0e72e92c570bffd200bf5b6c30024e6') in 0.029714 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/Resources/Environments/Area specfic architecture/Forgotten Crossroads/cd_archbase_01.png
+  artifactKey: Guid(6f3a0e406ba56454293b982704f62932) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Environments/Area specfic architecture/Forgotten Crossroads/cd_archbase_01.png using Guid(6f3a0e406ba56454293b982704f62932) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9578258cbe306aa21e28ef8f6021ccd6') in 0.029298 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000043 seconds.
+  path: Assets/Resources/Environments/Area specfic architecture/Forgotten Crossroads/cd_archway_04_r.png
+  artifactKey: Guid(c9b54e81c26eb8c4e9f853c310f2b157) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Environments/Area specfic architecture/Forgotten Crossroads/cd_archway_04_r.png using Guid(c9b54e81c26eb8c4e9f853c310f2b157) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fe7e1f9d58d46f4579d16c49d717a6e1') in 0.025371 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Assets/Resources/Environments/Area specfic architecture/Forgotten Crossroads/cd_big_roof_0001_06.png
+  artifactKey: Guid(8d7bec3b5a09fa44e9c866942e6533b2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Environments/Area specfic architecture/Forgotten Crossroads/cd_big_roof_0001_06.png using Guid(8d7bec3b5a09fa44e9c866942e6533b2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '36115185a50805b1e650ff7b6e55dacc') in 0.028923 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000033 seconds.
+  path: Assets/Resources/Environments/Area specfic architecture/Forgotten Crossroads/cd_dead_guardians_01_0001_07.png
+  artifactKey: Guid(13e0a9b1c296e7645b8d034e92167d5f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Environments/Area specfic architecture/Forgotten Crossroads/cd_dead_guardians_01_0001_07.png using Guid(13e0a9b1c296e7645b8d034e92167d5f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5a62c9df443ef10b085a3bb6a7cd1efd') in 0.029024 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000035 seconds.
+  path: Assets/Resources/Environments/Area specfic architecture/Forgotten Crossroads/cd_dead_guardians_01_0000_08.png
+  artifactKey: Guid(1ed4f7ee4fe1c5a40a76cdff64283217) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Environments/Area specfic architecture/Forgotten Crossroads/cd_dead_guardians_01_0000_08.png using Guid(1ed4f7ee4fe1c5a40a76cdff64283217) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7fc0f52ad615fb66ea3f7eeac8b61927') in 0.035870 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/Resources/Environments/Area specfic architecture/Forgotten Crossroads/cd_big_roof_0004_03.png
+  artifactKey: Guid(db5406b02f2ced6439ca4d75a322580a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Environments/Area specfic architecture/Forgotten Crossroads/cd_big_roof_0004_03.png using Guid(db5406b02f2ced6439ca4d75a322580a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd2608c575fc09663f15386c6e9168afb') in 0.037009 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Assets/Resources/Environments/Area specfic architecture/Forgotten Crossroads/cd_BG_egg_01.png
+  artifactKey: Guid(25a919544ca341e4e91e96e279e143c5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Environments/Area specfic architecture/Forgotten Crossroads/cd_BG_egg_01.png using Guid(25a919544ca341e4e91e96e279e143c5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a966198f1ce5e119e5e98d9f990ff740') in 0.035723 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000048 seconds.
+  path: Assets/Resources/Environments/Area specfic architecture/Forgotten Crossroads/cd_egg_guard_corpse_03.png
+  artifactKey: Guid(54342f7e8342ca643bfb29e4204daa8f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Environments/Area specfic architecture/Forgotten Crossroads/cd_egg_guard_corpse_03.png using Guid(54342f7e8342ca643bfb29e4204daa8f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0f9c0416f565764df5851d69727fe3d9') in 0.034717 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/Resources/Environments/Area specfic architecture/Forgotten Crossroads/cd_floor_highway_05.png
+  artifactKey: Guid(d231b70322436b5419ceac99fb8f49a6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Environments/Area specfic architecture/Forgotten Crossroads/cd_floor_highway_05.png using Guid(d231b70322436b5419ceac99fb8f49a6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bb9975ed2c5c4731085db117700ae722') in 0.032690 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000033 seconds.
+  path: Assets/Resources/Environments/Area specfic architecture/Forgotten Crossroads/cd_archway_01_broken.png
+  artifactKey: Guid(e64e73d3f4be01646afd9e5f79786ba4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Environments/Area specfic architecture/Forgotten Crossroads/cd_archway_01_broken.png using Guid(e64e73d3f4be01646afd9e5f79786ba4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6874bbc094202897b058f4fae727dfe2') in 0.028130 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000099 seconds.
+  path: Assets/Resources/Environments/Area specfic architecture/Forgotten Crossroads/cd_dead_guardians_01_0005_03.png
+  artifactKey: Guid(1990113ef2e51574abded84ff10e7e42) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Environments/Area specfic architecture/Forgotten Crossroads/cd_dead_guardians_01_0005_03.png using Guid(1990113ef2e51574abded84ff10e7e42) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '70cb5b2e368154cd55ff319fe3cd3b05') in 0.029404 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000025 seconds.
+  path: Assets/Resources/Environments/Area specfic architecture/Forgotten Crossroads/cd_archway_04.png
+  artifactKey: Guid(c149bb430e87c5a4cb77a46928c0d266) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Environments/Area specfic architecture/Forgotten Crossroads/cd_archway_04.png using Guid(c149bb430e87c5a4cb77a46928c0d266) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5186a129a65a03c93e32f7215bca12aa') in 0.029050 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 22.561276 seconds.
+  path: Assets/Resources/Environments/Area specfic architecture/Forgotten Crossroads/cd_mid_wall_detail_01.png
+  artifactKey: Guid(ce4e8210fd8055f4cab97db189a4a5fd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Environments/Area specfic architecture/Forgotten Crossroads/cd_mid_wall_detail_01.png using Guid(ce4e8210fd8055f4cab97db189a4a5fd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '46b1d626c2378ee3c63f162f55a7b508') in 0.028529 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000025 seconds.
+  path: Assets/Resources/Environments/Area specfic architecture/Forgotten Crossroads/cd_mid_wall_detail_lamp_l.png
+  artifactKey: Guid(82920a70bbc08b04dafb98e449d6bc47) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Environments/Area specfic architecture/Forgotten Crossroads/cd_mid_wall_detail_lamp_l.png using Guid(82920a70bbc08b04dafb98e449d6bc47) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1e5127160568e46d801913714ee81256') in 0.029089 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.050100 seconds.
+  path: Assets/Resources/Environments/Area specfic architecture/Forgotten Crossroads/cd_pillar_01.png
+  artifactKey: Guid(cb67784e962549d4abd5f260f1a203de) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Environments/Area specfic architecture/Forgotten Crossroads/cd_pillar_01.png using Guid(cb67784e962549d4abd5f260f1a203de) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1fb5ec997ea5dcf1d605e18fa3e0f9d6') in 0.026601 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Assets/Resources/Environments/Area specfic architecture/Forgotten Crossroads/cd_room_BG_01.png
+  artifactKey: Guid(a5ddec02c61fe504cb1241a12a7a0de8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Environments/Area specfic architecture/Forgotten Crossroads/cd_room_BG_01.png using Guid(a5ddec02c61fe504cb1241a12a7a0de8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '704b6507a093e498ddc4452db95137c9') in 0.033574 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/Resources/Environments/Area specfic architecture/Forgotten Crossroads/cd_room_BG_02.png
+  artifactKey: Guid(97e34e966b7e22b45be314c3ca4e5568) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Environments/Area specfic architecture/Forgotten Crossroads/cd_room_BG_02.png using Guid(97e34e966b7e22b45be314c3ca4e5568) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'eeb1dc87944062b31667117cb93e9be7') in 0.033904 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000045 seconds.
+  path: Assets/Resources/Environments/Area specfic architecture/Forgotten Crossroads/cd_wall_01_r.png
+  artifactKey: Guid(917daa2b9e2440e4fa9ad0a2140720ec) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Environments/Area specfic architecture/Forgotten Crossroads/cd_wall_01_r.png using Guid(917daa2b9e2440e4fa9ad0a2140720ec) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fc3f501032fbba2b208201044547c108') in 0.029541 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 1.553775 seconds.
+  path: Assets/Resources/Environments/Area specfic architecture/Forgotten Crossroads/cd_wall_04.png
+  artifactKey: Guid(37a63f50f03bd59479b4c066c5660723) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Environments/Area specfic architecture/Forgotten Crossroads/cd_wall_04.png using Guid(37a63f50f03bd59479b4c066c5660723) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '081797e7ba2b815b460b1ddef879291e') in 0.025311 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
+TcpMessagingSession - receive error: operation aborted. errorcode: 995, details: The I/O operation has been aborted because of either a thread exit or an application request.
+AssetImportWorker is now disconnected from the server
+Process exiting
+Exiting without the bug reporter. Application will terminate with return code 0
