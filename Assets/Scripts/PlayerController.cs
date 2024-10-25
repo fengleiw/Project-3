@@ -49,7 +49,8 @@ public class PlayerController : MonoBehaviour
 
     [Header("Attacking Setting")]
     bool attack = false;
-    float timeBetweenAttack, timeSinceAttack;
+    [SerializeField] float timeBetweenAttack;
+    private float timeSinceAttack;
     [SerializeField] Transform SideAttackTransform, UpAttackTransform, DownAttackTransform;
     [SerializeField] Vector2 SideAttackArea, UpAttackArea, DownAttackArea;
     [SerializeField] LayerMask attackableLayer;
@@ -117,7 +118,7 @@ public class PlayerController : MonoBehaviour
     private float xAxis, yAxis;
     Animator anim;
     [HideInInspector] public PlayerStateList pState;
-    private Rigidbody2D rb;
+    Rigidbody2D rb;
 
     public static PlayerController instance;
 
@@ -443,21 +444,25 @@ public class PlayerController : MonoBehaviour
                 int _recoilLeftOrRight = pState.lookingLeft ? 1: -1;
 
                 anim.SetTrigger("Attacking");
-                Hit(SideAttackTransform, SideAttackArea, ref pState.recoilingX,Vector2.left *_recoilLeftOrRight, recoilXSpeed);
                 Instantiate(slashEffect, SideAttackTransform);
+                Hit(SideAttackTransform, SideAttackArea, ref pState.recoilingX,Vector2.left *_recoilLeftOrRight, recoilXSpeed);
+                
             }
             else if (yAxis > 0)
             {
-                Hit(UpAttackTransform, UpAttackArea, ref pState.recoilingY,Vector2.up, recoilYSpeed);
-                Instantiate(upSlashEffect, UpAttackTransform);
                 anim.SetTrigger("upSlash");
+                Instantiate(upSlashEffect, UpAttackTransform);
+                Hit(UpAttackTransform, UpAttackArea, ref pState.recoilingY,Vector2.up, recoilYSpeed);
+                
+                
             }
             else if (yAxis < 0 && !IsGrounded())
-            {
+            {   anim.SetTrigger("downSlash");
+                Instantiate(downSlashEffect, DownAttackTransform);
                 Hit(DownAttackTransform, DownAttackArea, ref pState.recoilingY, Vector2.down, recoilYSpeed);
                 
-                Instantiate(downSlashEffect, DownAttackTransform);
-                anim.SetTrigger("downSlash");
+                
+                
             }
         }
     }

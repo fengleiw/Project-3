@@ -2,22 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class UIManager : MonoBehaviour
 {
+    public SceneFader sceneFader;
 
-    public string transitionedFromScene;
-    public Vector2 platformingReSpawnPoint;
-    public static GameManager Instance { get; private set; }
+    public static UIManager Instance;
     private void Awake()
     {
-        if(Instance != null && Instance != this)
+        if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
-        } else
+        }
+        else
         {
             Instance = this;
         }
         DontDestroyOnLoad(gameObject);
+
+        sceneFader = GetComponentInChildren<SceneFader>();
     }
- 
 }
