@@ -9,6 +9,8 @@ public class Crawler : EnemyController
     [SerializeField] private float ledgeCheckX;
     [SerializeField] private float ledgeCheckY;
     [SerializeField] private LayerMask whatIsGround;
+
+    
     protected override void Start()
     {
         base.Start();
@@ -21,10 +23,10 @@ public class Crawler : EnemyController
 
         if(health <= 0)
         {
-            Destroy(gameObject, 0.05f);
+            Death(0.05f);
         }
 
-        switch (currentEnemyState)
+        switch (GetCurrentEnemyState)
         {
             case EnemyStates.Crawler_Idle:
                 Vector3 _ledgeCheckStartPoint = transform.localScale.x > 0 ? new Vector3(ledgeCheckX, 0) : new Vector3(-ledgeCheckX, 0);

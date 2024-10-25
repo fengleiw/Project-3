@@ -15,6 +15,7 @@ public class TestMoving : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        rb.MovePosition(Vector2.MoveTowards(transform.position, PlayerController.instance.transform.position, Time.deltaTime * speed));
+        //rb.MovePosition(Vector2.MoveTowards(transform.position, PlayerController.instance.transform.position, Time.deltaTime * speed));
+        transform.localScale = new Vector2(transform.localScale.x * -1, transform.localScale.y);
     }
 }

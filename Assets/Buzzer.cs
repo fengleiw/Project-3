@@ -21,7 +21,7 @@ public class Buzzer : EnemyController
     {
         
         float _dist = Vector2.Distance(transform.position, PlayerController.instance.transform.position); 
-        switch (currentEnemyState)
+        switch (GetCurrentEnemyState)
         {
             case EnemyStates.Buzzer_Idle:
                 rb.velocity = new Vector2(0, 0);
@@ -54,6 +54,7 @@ public class Buzzer : EnemyController
                 break;
 
             case EnemyStates.Buzzer_Death:
+                Death(Random.Range(5,10));
                 break;
         }
     }
@@ -74,6 +75,23 @@ public class Buzzer : EnemyController
         } else
         {
             ChangeState(EnemyStates.Buzzer_Death);
+        }
+    }
+
+    protected override void Death(float _destroyTime)
+    {
+        rb.gravityScale = 12;
+        base.Death(_destroyTime);
+    }
+
+    protected override void ChangeCurrentAnimation()
+    {
+        anim.SetBool("idle", GetCurrentEnemyState == EnemyStates.Buzzer_Idle);
+        anim.SetBool("chase", GetCurrentEnemyState == EnemyStates.Buzzer_Chase);
+        anim.SetBool("stun", GetCurrentEnemyState == EnemyStates.Buzzer_Stunned);
+        if(GetCurrentEnemyState == EnemyStates.Buzzer_Death)
+        {
+            anim.SetTrigger("death");
         }
     }
 }
