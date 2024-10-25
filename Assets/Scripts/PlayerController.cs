@@ -118,7 +118,7 @@ public class PlayerController : MonoBehaviour
     private float xAxis, yAxis;
     Animator anim;
     [HideInInspector] public PlayerStateList pState;
-    Rigidbody2D rb;
+    public Rigidbody2D rb;
 
     public static PlayerController instance;
 
